@@ -54,14 +54,15 @@ int main(int argc, char *argv[])
 	Matrix modelMatrix;
 	Matrix viewMatrix;
 
-	projectionMatrix.setOrthoProjection(-3.55, 3.55, -2.0f, 2.0f, -1.0f, 1.0f);
+	projectionMatrix.setOrthoProjection(-5.0, 5.0, -2.817f, 2.817f, -1.0f, 1.0f);
 	glUseProgram(program.programID);
 
 	float lastFrameTicks = 0.0f;
+	float angle = 0.0f;
 	
 	SDL_Event event;
 	bool done = false;
-	while (!done) {   //LOOP
+	while (!done) {   //FrameLOOP
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
@@ -77,62 +78,78 @@ int main(int argc, char *argv[])
 		program.setProjectionMatrix(projectionMatrix);
 		program.setViewMatrix(viewMatrix);
 
-		//drawing 1
-		glBindTexture(GL_TEXTURE_2D, emojiTexture);
-		float vertices1[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 }; //Defines vertices Data
-
-		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices1);
-		glEnableVertexAttribArray(program.positionAttribute);
-
-		float texCoords1[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords1);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
-		
-
-		//drawing2
-		glBindTexture(GL_TEXTURE_2D, fireTexture);
-		float vertices2[] = { 1.0, 0.0, 2.0, 0.0, 2.0, 1.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0 };
-
-		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices2);
-		glEnableVertexAttribArray(program.positionAttribute);
-
-		float texCoords2[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords2);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
-
-
-		//drawing 3
-		glBindTexture(GL_TEXTURE_2D, iceTexture);
-		float vertices3[] = { -1.0, 0.0, -2.0, 0.0, -2.0, -1.0, -1.0, 0.0, -2.0, -1.0, -1.0, -1.0 };
-
-		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices3);
-		glEnableVertexAttribArray(program.positionAttribute);
-
-		float texCoords3[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords3);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
+		float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 }; //Defines vertices Data
+		float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
 
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
+		angle += elapsed;
 
-		modelMatrix.Rotate(elapsed*1.1);
+		modelMatrix.Rotate(angle*5.0);
+		program.setModelMatrix(modelMatrix);
+
+		//drawing 1
+		glBindTexture(GL_TEXTURE_2D, emojiTexture);
+
+		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+		glEnableVertexAttribArray(program.positionAttribute);
+
+		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+		glEnableVertexAttribArray(program.texCoordAttribute);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glDisableVertexAttribArray(program.positionAttribute);
+		glDisableVertexAttribArray(program.texCoordAttribute);
 		
+		modelMatrix.identity();
+		program.setModelMatrix(modelMatrix);
+
+		//drawing2
+		glBindTexture(GL_TEXTURE_2D, fireTexture);
+
+		modelMatrix.Rotate(angle*-1.1);
+		modelMatrix.Translate(0.5, 1.0, 0.0);
+		modelMatrix.Rotate(angle*-2.0);
+		program.setModelMatrix(modelMatrix);
+
+		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+		glEnableVertexAttribArray(program.positionAttribute);
+
+		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+		glEnableVertexAttribArray(program.texCoordAttribute);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glDisableVertexAttribArray(program.positionAttribute);
+		glDisableVertexAttribArray(program.texCoordAttribute);
+
+		modelMatrix.identity();
+		program.setModelMatrix(modelMatrix);
+
+		//drawing 3
+		glBindTexture(GL_TEXTURE_2D, iceTexture);
+
+		modelMatrix.Rotate(angle*1.4);
+		modelMatrix.Translate(-1.5, -1.0, 0.0);
+		modelMatrix.Rotate(angle*3.0);
+		program.setModelMatrix(modelMatrix);
+
+		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+		glEnableVertexAttribArray(program.positionAttribute);
+
+		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+		glEnableVertexAttribArray(program.texCoordAttribute);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glDisableVertexAttribArray(program.positionAttribute);
+		glDisableVertexAttribArray(program.texCoordAttribute);
+
+		modelMatrix.identity();
+		program.setModelMatrix(modelMatrix);
+
 		SDL_GL_SwapWindow(displayWindow);
 	}
 
