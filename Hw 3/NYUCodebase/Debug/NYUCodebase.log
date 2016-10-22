@@ -1,0 +1,35 @@
+﻿Build started 10/22/2016 1:04:56 AM.
+     1>Project "C:\Users\Chun\CS3113\project_template\Windows\Hw 3\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (GameProgHw2.vcxproj, NYUCodebase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(91): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(126): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(127): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(155): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(156): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(168): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(187): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(188): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(199): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(229): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(234): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(267): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(272): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(305): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(307): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(326): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(335): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(339): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\hw 3\nyucodebase\main.cpp(348): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chun\CS3113\project_template\Windows\Hw 3\Debug\GameProgHw3.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Chun\CS3113\project_template\Windows\Hw 3\Debug\GameProgHw3.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Chun\CS3113\project_template\Windows\Hw 3\Debug\GameProgHw3.lib" /MACHINE:X86 Debug\main.obj
+         Debug\Matrix.obj
+         Debug\ShaderProgram.obj
+         NYUCodebase.vcxproj -> C:\Users\Chun\CS3113\project_template\Windows\Hw 3\Debug\GameProgHw3.exe
+     1>Done Building Project "C:\Users\Chun\CS3113\project_template\Windows\Hw 3\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.27
