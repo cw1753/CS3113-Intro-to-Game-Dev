@@ -10,7 +10,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
-#define LEVEL_HEIGHT 26
+#define LEVEL_HEIGHT 41
 #define LEVEL_WIDTH 22
 #define TILE_SIZE 0.27f
 #define toAngle 3.1416/180
@@ -46,14 +46,14 @@ public:
 	float y;
 	float rotation;
 
-	float width;
-	float height;
+	float width = 0.27f;
+	float height = 0.27f;
 
 	float speed;
 	float vel_x;
 	float vel_y;
 	float acc_x = 0.0f;
-	float acc_y = 0.0;// -9.81f;
+	float acc_y =  -9.81f;
 
 	bool isAlive = 1;
 	bool isStatic;
@@ -92,15 +92,49 @@ bool done = false;
 float lastFrameTicks = 0.0f;
 float elapsed;
 float gameTimer = 0.0f;
+int totalTime = 0.0;
 entity myPlayer;
+vector <entity> entVec;
 float velc = 6.0f;
+bool win = 0;
+int score = 0;
 
-
+bool isSolid(unsigned char index){
+	if (index == 2){
+		return true;
+	}
+	else if (index == 3){
+		return true;
+	}
+	else if (index == 6){
+		return true;
+	}
+	else if (index == 4){
+		return true;
+	}
+	else
+		return false;
+}
 
 
 unsigned char levelData[LEVEL_HEIGHT][LEVEL_WIDTH] =
 {
-	{ 0, 20, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 20, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 20, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 6, 6, 6, 0, 0, 0, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
+	{ 0, 20, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 20, 0 },
 	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
 	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
 	{ 0, 20, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
@@ -122,8 +156,8 @@ unsigned char levelData[LEVEL_HEIGHT][LEVEL_WIDTH] =
 	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
 	{ 0, 20, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 20, 0 },
 	{ 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0 },
-	{ 0, 20, 125, 118, 0, 0, 116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 127, 20, 0 },
-	{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+	{ 0, 20, 125, 118, 0, 0, 116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 116, 0, 127, 20, 0 },
+	{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
 	{ 32, 33, 33, 34, 32, 33, 33, 34, 33, 35, 100, 101, 35, 32, 33, 32, 34, 32, 33, 32, 33, 33 }
 };
 
@@ -192,6 +226,37 @@ void drawMyPlayer(int spriteTexture, int index, int spriteCountX, int spriteCoun
 		modelMatrix.identity();
 	}
 }
+void drawEntity(int spriteTexture, int index, int spriteCountX, int spriteCountY) {
+	float u = (float)(((int)index) % spriteCountX) / (float)spriteCountX;
+	float v = (float)(((int)index) / spriteCountX) / (float)spriteCountY;
+	float spriteWidth = 1.0 / (float)spriteCountX;
+	float spriteHeight = 1.0 / (float)spriteCountY;
+	GLfloat texCoords[] = {
+		u, v + spriteHeight,
+		u + spriteWidth, v,
+		u, v,
+		u + spriteWidth, v,
+		u, v + spriteHeight,
+		u + spriteWidth, v + spriteHeight
+	};
+	float vertices[] = { -0.25f, -0.25f, 0.25f, 0.25f, -0.25f, 0.25f, 0.25f, 0.25f, -0.25f, -0.25f, 0.25f, -0.25f };
+
+	for (int i = 1; i < entVec.size(); i++){
+		if (entVec[i].isAlive){
+			modelMatrix.Translate(entVec[i].x, entVec[i].y, 0.0f);
+			program->setModelMatrix(modelMatrix);
+			glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+			glEnableVertexAttribArray(program->positionAttribute);
+			glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+			glEnableVertexAttribArray(program->texCoordAttribute);
+			glBindTexture(GL_TEXTURE_2D, spriteTexture);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glDisableVertexAttribArray(program->positionAttribute);
+			glDisableVertexAttribArray(program->texCoordAttribute);
+			modelMatrix.identity();
+		}
+	}
+}
 void drawTile(int Texture, int SPRITE_COUNT_X, int SPRITE_COUNT_Y){
 	vector<float> vertexData;
 	vector<float> texCoordData;
@@ -221,7 +286,6 @@ void drawTile(int Texture, int SPRITE_COUNT_X, int SPRITE_COUNT_Y){
 			}
 		}
 	}
-	//modelMatrix.Translate(-3.0f, 2.0f, 0.0f);
 	program->setModelMatrix(modelMatrix);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -232,13 +296,97 @@ void drawTile(int Texture, int SPRITE_COUNT_X, int SPRITE_COUNT_Y){
 	modelMatrix.identity();
 	program->setModelMatrix(modelMatrix);
 	glBindTexture(GL_TEXTURE_2D, Texture);
-	glDrawArrays(GL_TRIANGLES, 0,  vertexData.size());
+	glDrawArrays(GL_TRIANGLES, 0,  vertexData.size() / 2);
 	glDisableVertexAttribArray(program->positionAttribute);
 	glDisableVertexAttribArray(program->texCoordAttribute);
 	modelMatrix.identity();
 }
 
-bool collsion(entity B1, entity B2){
+
+int gridX = 0;
+int gridY = 0;
+void collisionBottom(entity &ent){
+	worldToTileCoord(ent.x, ent.y - (ent.height / 2), &gridX, &gridY);
+	if (gridY <= 0){
+		gridY = 0;
+	}
+	else if (gridY >= LEVEL_HEIGHT){
+		gridY = LEVEL_HEIGHT;
+	}
+	if (isSolid(levelData[gridY][gridX])){
+		ent.collidedBottom = 1;
+
+		ent.vel_y = 0;
+		ent.acc_y = 0;
+		float penetration_Y = (-TILE_SIZE *gridY) - (ent.y - ent.height / 2);
+		ent.y += penetration_Y;
+		return;
+	}
+	else{
+		ent.collidedBottom = 0;
+		ent.acc_y = -9.81;
+	}
+}
+void collisionTop(entity &ent){
+	worldToTileCoord(ent.x, ent.y + (ent.height / 2), &gridX, &gridY);
+	if (gridY <= 0){
+		gridY = 0;
+	}
+	else if (gridY >= LEVEL_HEIGHT){
+		gridY = LEVEL_HEIGHT;
+	}
+	if (isSolid(levelData[gridY][gridX])){
+		ent.collidedTop = 1;
+		ent.vel_y = 0;
+		//ent.acc_y = 0;
+		float penetration_Y = (ent.y + ent.height / 2) - (-TILE_SIZE *gridY - TILE_SIZE);
+		ent.y -= penetration_Y;
+		return;
+	}
+	else{
+		ent.collidedTop = 0;
+		ent.acc_y = -9.81;
+	}
+}
+void collisionLeft(entity &ent){
+	float penetration_X;
+	worldToTileCoord(ent.x - (ent.width / 2), ent.y, &gridX, &gridY);
+	if (gridX <= 0){
+		gridX = 0;
+	}
+	else if (gridX >= LEVEL_WIDTH){
+		gridX = LEVEL_WIDTH;
+	}
+	if (levelData[gridY][gridX] == 20 || isSolid(levelData[gridY][gridX])){
+		ent.vel_x = 0;
+		ent.acc_x = 0;
+		ent.collidedLeft = 1;
+		penetration_X = (TILE_SIZE *gridX + TILE_SIZE) - (ent.x - ent.width / 2);
+		ent.x += penetration_X;
+		return;
+	}
+	ent.collidedLeft = 0;
+}
+void collisionRight(entity &ent){
+	float penetration_X;
+	worldToTileCoord(ent.x + (ent.width / 2), ent.y, &gridX, &gridY);
+	if (gridX <= 0){
+		gridX = 0;
+	}
+	else if (gridX >= LEVEL_WIDTH){
+		gridX = LEVEL_WIDTH;
+	}
+	if (levelData[gridY][gridX] == 20 || isSolid(levelData[gridY][gridX])){
+		ent.vel_x = 0;
+		ent.acc_x = 0;
+		ent.collidedRight = 1;
+		penetration_X = (ent.x + ent.width / 2) - (TILE_SIZE *gridX);
+		ent.x -= penetration_X;
+		return;
+	}
+	ent.collidedLeft = 0;
+}
+bool collisionEntity(entity B1, entity B2){
 	if (B1.x - B1.width / 2 <= B2.x + B2.width / 2
 		&& B1.x + B1.width / 2 >= B2.x - B2.width / 2){
 		if (B1.y + B1.height / 2 >= B2.y - B2.height / 2
@@ -248,133 +396,79 @@ bool collsion(entity B1, entity B2){
 	}
 	return false;
 }
-void collsion_Y(entity ent){
-	float entTop = ent.y + ent.height / 2;
-	float entBot = ent.y - ent.height / 2;
-
-	for (int y = 0; y < LEVEL_HEIGHT; y++) {
-		for (int x = 0; x < LEVEL_WIDTH; x++) {
-			if (levelData[y][x] != 0){
-				float tileTop = -TILE_SIZE * y;
-				float tileBot = (-TILE_SIZE * y) - TILE_SIZE;
-				float distance = ent.y - (tileTop - TILE_SIZE / 2);
-				if (entTop >= tileBot && entBot <= tileTop){
-					float penetration = fabs(distance - (ent.height / 2) - (TILE_SIZE / 2));
-					ent.y += penetration + 0.01;
-					ent.collidedBottom = 1;
-					ent.vel_y = 0.0f;
-					ent.acc_y = 0.0f;
-					return;
-
-				}
-			}
-		}
-	}
-	//ent.acc_y = -9.81f;
-	ent.collidedBottom = 0;
-}
-/*void collsion_Y(entity ent){
-	float playerY = -ent.y / TILE_SIZE;
-	float playerHeight = ent.height / TILE_SIZE;
-	float entTop = playerY + playerHeight / 2;
-	float entBot = playerY - playerHeight / 2;
-
-	for (int y = 0; y < LEVEL_HEIGHT; y++) {
-		for (int x = 0; x < LEVEL_WIDTH; x++) {
-			if (levelData[y][x] != 0){
-				float tileTop = -TILE_SIZE * y;
-				float tileBot = (-TILE_SIZE * y) - TILE_SIZE;
-				float distance = playerY - (tileTop - TILE_SIZE / 2);
-				if (entTop >= tileBot && entBot <= tileTop){
-					float penetration = fabs(distance - (playerHeight / 2) - (TILE_SIZE / 2));
-					ent.y = TILE_SIZE * (penetration + 0.001);
-					ent.collidedBottom == 1;
-					return;
-
-				}
-			}
-		}
-	}
-}*/
-int gridX = 0;
-int gridY = 0;
-/*void collsion_Y(entity ent){
-	worldToTileCoord(ent.x, ent.y - (ent.height / 2), &gridX, &gridY);
-	if (gridY <= 0){
-		gridY = 0;
-	}
-	else if (gridY >= LEVEL_HEIGHT){
-		gridY = LEVEL_HEIGHT;
-	}
-	if (levelData[gridX][gridY] != 0 && levelData[gridX][gridY] != 20){
-		ent.collidedBottom = 1;
-		ent.vel_y = 0;
-		ent.acc_y = 0;
-		int penetration_Y = (-TILE_SIZE *gridY) - (ent.y - ent.height / 2);
-		return;
-	}
-	else{
-		ent.collidedBottom = 0;
-		ent.acc_y = -9.81;
-	}
-}*/
-
 void updateMainMenu(){}
 void updateGame(float time){
-	//Update Velocity
+	//Update Player
 	myPlayer.vel_y = lerp(myPlayer.vel_y, 0.0f, time * 0.5f); // Friction
 	myPlayer.vel_x = lerp(myPlayer.vel_x, 0.0f, time * 0.5f);
 
-	//myPlayer.vel_y = lerp(myPlayer.vel_y, 0.0f, time * friction_y);
-	//myPlayer.vel_x = lerp(myPlayer.vel_x, 0.0f, time * friction_x);
-	//myPlayer.vel_y += -9.81*time; // Gravity
 	myPlayer.vel_y += myPlayer.acc_y * time;
 	myPlayer.vel_x += myPlayer.acc_x * time;
 
 	myPlayer.y += myPlayer.vel_y * time;
-	collsion_Y(myPlayer);
+	collisionBottom(myPlayer);
+	collisionTop(myPlayer);
 
 	myPlayer.x += myPlayer.vel_x * time;
+	collisionLeft(myPlayer);
+	collisionRight(myPlayer);
+	
+	//Update Kings
+	for (int i = 0; i < entVec.size(); i++){
+		entVec[i].vel_y = lerp(entVec[i].vel_y, 0.0f, time * 0.5f); // Friction
+		entVec[i].vel_x = lerp(entVec[i].vel_x, 0.0f, time * 0.5f);
 
-	//MyPlayer (Bound and Position Update)
-	/*if (myPlayer.speed > 0){
-		if (myPlayer.x + myPlayer.width / 2 < 5.0f){
-			myPlayer.x += myPlayer.speed*elapsed;
-		}
-		else{
-			myPlayer.x = 5.0f - myPlayer.width / 2;
+		entVec[i].vel_y += entVec[i].acc_y * time;
+		entVec[i].vel_x += entVec[i].acc_x * time;
+
+		entVec[i].y += entVec[i].vel_y * time;
+		collisionBottom(entVec[i]);
+		collisionTop(entVec[i]);
+
+		entVec[i].x += entVec[i].vel_x * time;
+		collisionLeft(entVec[i]);
+		collisionRight(entVec[i]);
+		
+		//Check if Player and Kings collide
+		if (collisionEntity(myPlayer, entVec[i]) && entVec[i].isAlive){
+			score += 10;
+			entVec[i].isAlive = 0;
 		}
 	}
-	else{
-		if (myPlayer.x - myPlayer.width / 2 > -5.0f){
-			myPlayer.x += myPlayer.speed*elapsed;
-		}
-		else{
-			myPlayer.x = -5.0f + myPlayer.width / 2;
-		}
-	}*/
-
-	//Collsion Checking 
 
 	//Checking for Game Over (losing or Winning)
 	if (myPlayer.y > 0){
+		win = 1;
+		totalTime = gameTimer;
+		state = State_Game_Over;
+	}
+	else if (myPlayer.y - myPlayer.height / 2 < (-TILE_SIZE*LEVEL_HEIGHT - TILE_SIZE)){
 		state = State_Game_Over;
 	}
 }
 void updateGameOver(){}
 
 void renderMainMenu(){
-	drawText(FontTexture, "ESCAPE", 0.6f, 0.001f, -2.0f, 1.6f);
+	drawText(FontTexture, "Save The Royal", 0.6f, 0.001f, -3.9f, 1.6f);
 	drawText(FontTexture, "Press", 0.5f, 0.001f, -1.0f, 0.0f);
 	drawText(FontTexture, "SPACEBAR", 0.5f, 0.001f, -1.8f, -1.0f);
 }
 void renderGame(){
-	//drawMyPlayer(spaceShipTexture, 17, 8, 4);
 	drawTile(TileMapTexture, 16, 8);
 	drawMyPlayer(playerTexture, 17, 8, 4);
+	drawEntity(playerTexture, 9, 8, 4);
+
 }
 void renderGameOver(){
-	drawText(FontTexture, "Winner", 0.6f, 0.001f, -2.0f, 1.6f);
+	if (win){
+		drawText(FontTexture, "Winner", 0.6f, 0.001f, -2.0f, 1.6f);
+		drawText(FontTexture, "Score: " + to_string(score), 0.5f, 0.001f, -3.0f, 0.0f);
+		drawText(FontTexture, "Time: " + to_string(totalTime) + " seconds", 0.5f, 0.001f, -3.0f, -1.0f);
+	}
+	else{
+		drawText(FontTexture, "LOSER", 0.6f, 0.001f, -2.0f, 1.6f);
+		drawText(FontTexture, "YOU SUCK", 0.6f, 0.001f, -2.0f, -0.0f);
+	}
 }
 
 void setup(){
@@ -391,7 +485,6 @@ void setup(){
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
 
 	projectionMatrix.setOrthoProjection(-5.0, 5.0, -2.817f, 2.817f, -1.0f, 1.0f);
-	//projectionMatrix.setOrthoProjection(-3.0, 17.0, -14.085f, -1.0f, -1.0f, 1.0f);
 
 	glUseProgram(program->programID);
 
@@ -399,15 +492,26 @@ void setup(){
 	program->setProjectionMatrix(projectionMatrix);
 	program->setViewMatrix(viewMatrix);
 
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-
-	myPlayer.width = 0.27f;
-	myPlayer.height = 0.27f;
-	//myPlayer.x = 0.0f;
-	//myPlayer.y = -1.1f;
 	myPlayer.x = TILE_SIZE * (LEVEL_WIDTH - 19);
 	myPlayer.y = -TILE_SIZE * (LEVEL_HEIGHT - 4);
+	int yCount = 4;
+	int xCount = 3;
+	for (int i = 0; i < 10; i++){
+		entity king;
+		king.x = TILE_SIZE * (LEVEL_WIDTH - xCount);
+		king.y = -TILE_SIZE * (LEVEL_HEIGHT - yCount);
+		king.vel_x = 0;
+		king.vel_y = 0;
+		entVec.push_back(king);
+		if (i <= 6){
+			yCount += 3;
+			xCount += 2;
+		}
+		else{
+			yCount += 2.7;
+			xCount -= 2;
+		}
+	}
 
 	FontTexture = LoadTexture("font1.png");
 	playerTexture = LoadTexture("characters.png");
@@ -422,8 +526,8 @@ void processEvents(){
 		else if (state == State_Game){
 			if (event.type == SDL_KEYDOWN){
 				if (event.key.keysym.scancode == SDL_SCANCODE_SPACE){
-					if (myPlayer.collidedBottom == 0){
-						myPlayer.vel_y = velc - 3;
+					if (myPlayer.collidedBottom == 1 ){
+						myPlayer.vel_y = velc - 1.0;
 						myPlayer.collidedBottom = 0;
 					}
 				}
@@ -436,9 +540,6 @@ void processEvents(){
 		}
 	}
 	else if (state == State_Game){
-		if (keys[SDL_SCANCODE_SPACE]){
-			
-		}
 		if (keys[SDL_SCANCODE_LEFT]){
 			myPlayer.acc_x = -velc;
 		}
@@ -471,7 +572,6 @@ void update(){
 			updateGame(FIXED_TIMESTEP);
 		}
 		updateGame(fixedElapsed);
-		//updateGame(elapsed);
 		break;
 	}
 	case State_Game_Over:
@@ -494,9 +594,6 @@ void render(){
 		break;
 	case State_Game:
 		viewMatrix.identity();
-		//viewMatrix.Translate(temp, 0.0f, 0.0f);
-		//viewMatrix.Scale(1.2f, 1.2f, 1.0f);
-		//viewMatrix.Translate(-3.0f, 3.0f, 0.0f);
 		viewMatrix.Translate(-myPlayer.x, -myPlayer.y, 0.0f);
 		viewMatrix.Scale(1.3f, 1.1f, 1.0f);
 		program->setViewMatrix(viewMatrix);
