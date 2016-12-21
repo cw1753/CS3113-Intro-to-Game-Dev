@@ -873,7 +873,7 @@ void renderGameOver(){
 	}
 	else if (winner==2){
 		glViewport(0, 0, screenWildth / 2, screenHeight);
-		drawText(FontTexture, "Winner", 0.6f, 0.001f, -2.0f, 1.6f);
+		drawText(FontTexture, "Loser", 0.6f, 0.001f, -2.0f, 1.6f);
 		drawText(FontTexture, "HP: " + to_string(player1.health), 0.5f, 0.001f, -3.2f, 0.0f);
 		drawText(FontTexture, "ATK:" + to_string(player1.attack), 0.5f, 0.001f, -3.2f, -0.4f);
 		drawText(FontTexture, "DEF:" + to_string(player1.defense), 0.5f, 0.001f, -3.2f, -0.8f);
@@ -881,7 +881,7 @@ void renderGameOver(){
 		drawText(FontTexture, "Time: " + to_string(totalTime) + " seconds", 0.5f, 0.001f, -3.2f, -1.6f);
 		program->setViewMatrix(viewMatrix);
 		glViewport(screenWildth / 2, 0, screenWildth / 2, screenHeight);
-		drawText(FontTexture, "Loser", 0.6f, 0.001f, -2.0f, 1.6f);
+		drawText(FontTexture, "Winner", 0.6f, 0.001f, -2.0f, 1.6f);
 		drawText(FontTexture, "HP: " + to_string(player2.health), 0.5f, 0.001f, -3.2f, 0.0f);
 		drawText(FontTexture, "ATK:" + to_string(player2.attack), 0.5f, 0.001f, -3.2f, -0.4f);
 		drawText(FontTexture, "DEF:" + to_string(player2.defense), 0.5f, 0.001f, -3.2f, -0.8f);
