@@ -1,0 +1,74 @@
+﻿Build started 12/21/2016 11:23:58 AM.
+     1>Project "C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Matrix.cpp ShaderProgram.cpp main.cpp
+         main.cpp
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(47): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(134): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(136): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(142): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(143): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(216): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(255): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(268): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(275): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(276): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(278): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(289): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(290): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(300): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(378): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(379): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(406): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(407): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(417): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(586): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(614): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(619): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(624): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(630): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(632): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(634): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(649): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(660): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(666): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(699): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(704): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(711): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(729): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(736): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(749): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(774): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(790): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(794): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(808): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(816): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(833): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(837): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(854): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(858): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(866): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(875): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(883): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(892): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(900): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(912): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(930): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(931): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(932): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(974): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\chun\cs3113\project_template\windows\battleleague\nyucodebase\main.cpp(984): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         ShaderProgram.cpp
+         Matrix.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\Debug\BattleLeague.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\Debug\BattleLeague.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\Debug\BattleLeague.lib" /MACHINE:X86 Debug\main.obj
+         Debug\Matrix.obj
+         Debug\ShaderProgram.obj
+         NYUCodebase.vcxproj -> C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\Debug\BattleLeague.exe
+     1>Done Building Project "C:\Users\Chun\CS3113\project_template\Windows\BattleLeague\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.57
